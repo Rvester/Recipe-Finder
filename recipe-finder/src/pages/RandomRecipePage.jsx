@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { fetchRandomRecipe } from "../api/recipeAPI";
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
-  Container,
-} from "@material-ui/core";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
 
 const RandomRecipePage = () => {
   const [recipe, setRecipe] = useState(null);

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { TextField } from "@material-ui/core";
+import TextField from "@mui/material/TextField";
 import { GlobalContext } from "../context/GlobalState";
 
 const SearchBar = () => {

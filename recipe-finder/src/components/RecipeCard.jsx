@@ -1,5 +1,8 @@
 import React from "react";
-import { Card, CardContent, CardMedia, Typography } from "@material-ui/core";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
 
 const RecipeCard = ({ recipe }) => {
   return (

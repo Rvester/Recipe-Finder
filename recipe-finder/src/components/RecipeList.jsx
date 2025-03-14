@@ -1,6 +1,6 @@
 import React from "react";
 import RecipeCard from "./RecipeCard";
-import { Grid } from "@material-ui/core";
+import Grid from "@mui/material/Grid";
 
 const RecipeList = ({ recipes }) => {
   return (
