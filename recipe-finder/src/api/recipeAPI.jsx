@@ -1,6 +1,6 @@
 export const fetchRecipes = async () => {
   const response = await fetch(
-    "https://api.spoonacular.com/recipes/random?number=500&apiKey=ad173b551e5541eea830fd81b1c46001"
+    "https://api.spoonacular.com/recipes/random?number=500&apiKey=27e27b14f252496d8355a31fa11e64b0"
   );
   const data = await response.json();
   return data.recipes;
@@ -8,7 +8,7 @@ export const fetchRecipes = async () => {
 
 export const fetchRecipeById = async (id) => {
   const response = await fetch(
-    `https://api.spoonacular.com/recipes/${id}/information?apiKey=ad173b551e5541eea830fd81b1c46001`
+    `https://api.spoonacular.com/recipes/${id}/information?apiKey=27e27b14f252496d8355a31fa11e64b0`
   );
   const data = await response.json();
   return data;
@@ -16,7 +16,7 @@ export const fetchRecipeById = async (id) => {
 
 export const fetchRandomRecipe = async () => {
   const response = await fetch(
-    "https://api.spoonacular.com/recipes/random?number=1&includeNutrition=true&apiKey=ad173b551e5541eea830fd81b1c46001"
+    "https://api.spoonacular.com/recipes/random?number=1&includeNutrition=true&apiKey=27e27b14f252496d8355a31fa11e64b0"
   );
   const data = await response.json();
   return data.recipes[0];
