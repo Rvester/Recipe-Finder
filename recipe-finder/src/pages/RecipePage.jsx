@@ -19,6 +19,14 @@ const RecipePage = () => {
       <h1>{recipe.title}</h1>
       <img src={recipe.image} alt={recipe.title} />
       <p>{recipe.instructions}</p>
+      <h2>Nutritional Information</h2>
+      <ul>
+        {recipe.nutrition.nutrients.map((nutrient) => (
+          <li key={nutrient.name}>
+            {nutrient.name}: {nutrient.amount} {nutrient.unit}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
