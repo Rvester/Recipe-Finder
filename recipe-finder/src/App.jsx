@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import FavoritesPage from "./pages/FavoritesPage";
 import RecipePage from "./pages/RecipePage";
@@ -14,12 +14,12 @@ function App() {
       <Router>
         <div className="App">
           <Navbar />
-          <Switch>
-            <Route exact path="/" component={HomePage} />
-            <Route path="/favorites" component={FavoritesPage} />
-            <Route path="/recipe/:id" component={RecipePage} />
-            <Route path="/random" component={RandomRecipePage} />
-          </Switch>
+          <Routes>
+            <Route exact path="/" element={<HomePage />} />
+            <Route path="/favorites" element={<FavoritesPage />} />
+            <Route path="/recipe/:id" element={<RecipePage />} />
+            <Route path="/random" element={<RandomRecipePage />} />
+          </Routes>
         </div>
       </Router>
     </GlobalProvider>
