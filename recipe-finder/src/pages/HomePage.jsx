@@ -3,6 +3,7 @@ import RecipeList from "../components/RecipeList";
 import SearchBar from "../components/SearchBar";
 import { fetchRecipes } from "../api/recipeAPI";
 import { GlobalContext } from "../context/GlobalState";
+import { Container, Typography, Box } from "@mui/material";
 
 const HomePage = () => {
   const [recipes, setRecipes] = useState([]);
@@ -17,10 +18,20 @@ const HomePage = () => {
   );
 
   return (
-    <div>
-      <SearchBar />
-      <RecipeList recipes={filteredRecipes} />
-    </div>
+    <Container>
+      <Box my={4}>
+        <Typography
+          variant="h4"
+          component="h1"
+          gutterBottom
+          sx={{ fontWeight: "bold", color: "primary.main" }}
+        >
+          Discover Delicious Recipes
+        </Typography>
+        <SearchBar />
+        <RecipeList recipes={filteredRecipes} />
+      </Box>
+    </Container>
   );
 };
 

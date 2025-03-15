@@ -6,7 +6,7 @@ const RecipeList = ({ recipes }) => {
   return (
     <Grid container spacing={3}>
       {recipes.map((recipe) => (
-        <Grid item xs={12} sm={6} md={4} key={recipe.id}>
+        <Grid item xs={12} sm={6} md={4} lg={3} key={recipe.id}>
           <RecipeCard recipe={recipe} />
         </Grid>
       ))}
