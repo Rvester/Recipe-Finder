@@ -1,21 +1,8 @@
-import React, { useState } from "react";
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
-  Collapse,
-  Button,
-  Box,
-} from "@mui/material";
+import React from "react";
+import { Card, CardContent, CardMedia, Typography } from "@mui/material";
+import DOMPurify from "dompurify";
 
-const RecipeCard = ({ recipe }) => {
-  const [expanded, setExpanded] = useState(false);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
-
+const RecipeCard = ({ recipe, onClick }) => {
   return (
     <Card
       sx={{
@@ -25,6 +12,7 @@ const RecipeCard = ({ recipe }) => {
         display: "flex",
         flexDirection: "column",
       }}
+      onClick={onClick}
     >
       <CardMedia
         component="img"
@@ -43,35 +31,13 @@ const RecipeCard = ({ recipe }) => {
         >
           {recipe.title}
         </Typography>
-        <Button
-          onClick={handleExpandClick}
-          sx={{ textTransform: "none", color: "primary.main" }}
-        >
-          {expanded ? "Show Less" : "Show More"}
-        </Button>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <Box mt={2}>
-            <Typography variant="body2" color="textSecondary" component="p">
-              {recipe.instructions}
-            </Typography>
-            <Typography variant="h6" component="h3" sx={{ mt: 2 }}>
-              Nutritional Information
-            </Typography>
-            {recipe.nutrition && recipe.nutrition.nutrients ? (
-              <ul>
-                {recipe.nutrition.nutrients.map((nutrient) => (
-                  <li key={nutrient.name}>
-                    {nutrient.name}: {nutrient.amount} {nutrient.unit}
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <Typography variant="body2" color="textSecondary" component="p">
-                Nutritional information is not available.
-              </Typography>
-            )}
-          </Box>
-        </Collapse>
+        <Typography
+          variant="body2"
+          color="textSecondary"
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(recipe.description),
+          }}
+        ></Typography>
       </CardContent>
     </Card>
   );

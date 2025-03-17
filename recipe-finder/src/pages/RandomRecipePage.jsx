@@ -5,6 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import DOMPurify from "dompurify";
 
 const RandomRecipePage = () => {
   const [recipe, setRecipe] = useState(null);
@@ -41,11 +42,12 @@ const RandomRecipePage = () => {
           <Typography
             variant="body2"
             color="textSecondary"
-            component="p"
+            component="div"
             align="center"
-          >
-            {recipe.instructions}
-          </Typography>
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(recipe.instructions),
+            }}
+          />
           <Typography variant="subtitle1" component="h3" align="center">
             Nutritional Information
           </Typography>
