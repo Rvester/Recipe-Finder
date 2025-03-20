@@ -61,21 +61,21 @@ const HomePage = () => {
         >
           {selectedRecipe && (
             <Card sx={{ maxWidth: 420, position: "relative" }}>
-              {" "}
-              {/* Adjusted maxWidth to 420px */}
               <IconButton
                 sx={{ position: "absolute", top: 8, right: 8 }}
                 onClick={handleClose}
               >
                 <CloseIcon />
               </IconButton>
-              <CardMedia
-                component="img"
-                alt={selectedRecipe.title}
-                height="300"
-                image={selectedRecipe.image}
-                title={selectedRecipe.title}
-              />
+              {selectedRecipe.image && (
+                <CardMedia
+                  component="img"
+                  alt={selectedRecipe.title}
+                  height="300"
+                  image={selectedRecipe.image}
+                  title={selectedRecipe.title}
+                />
+              )}
               <CardContent>
                 <Typography
                   gutterBottom
@@ -85,15 +85,17 @@ const HomePage = () => {
                 >
                   {selectedRecipe.title}
                 </Typography>
-                <Typography
-                  variant="body2"
-                  color="textSecondary"
-                  component="div"
-                  align="center"
-                  dangerouslySetInnerHTML={{
-                    __html: selectedRecipe.instructions,
-                  }}
-                />
+                {selectedRecipe.instructions && (
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="div"
+                    align="center"
+                    dangerouslySetInnerHTML={{
+                      __html: selectedRecipe.instructions,
+                    }}
+                  />
+                )}
                 <Typography
                   variant="h6"
                   component="h3"

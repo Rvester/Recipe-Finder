@@ -14,14 +14,16 @@ const RecipeCard = ({ recipe, onClick }) => {
       }}
       onClick={onClick}
     >
-      <CardMedia
-        component="img"
-        alt={recipe.title}
-        height="200"
-        image={recipe.image}
-        title={recipe.title}
-        sx={{ borderRadius: 2 }}
-      />
+      {recipe.image && (
+        <CardMedia
+          component="img"
+          alt={recipe.title}
+          height="200"
+          image={recipe.image}
+          title={recipe.title}
+          sx={{ borderRadius: 2 }}
+        />
+      )}
       <CardContent sx={{ flexGrow: 1 }}>
         <Typography
           gutterBottom
