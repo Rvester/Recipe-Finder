@@ -11,8 +11,9 @@ import {
   Card,
   CardContent,
   CardMedia,
+  IconButton,
 } from "@mui/material";
-import DOMPurify from "dompurify";
+import CloseIcon from "@mui/icons-material/Close";
 
 const HomePage = () => {
   const [recipes, setRecipes] = useState([]);
@@ -59,7 +60,15 @@ const HomePage = () => {
           }}
         >
           {selectedRecipe && (
-            <Card sx={{ maxWidth: 600 }}>
+            <Card sx={{ maxWidth: 420, position: "relative" }}>
+              {" "}
+              {/* Adjusted maxWidth to 420px */}
+              <IconButton
+                sx={{ position: "absolute", top: 8, right: 8 }}
+                onClick={handleClose}
+              >
+                <CloseIcon />
+              </IconButton>
               <CardMedia
                 component="img"
                 alt={selectedRecipe.title}
@@ -82,7 +91,7 @@ const HomePage = () => {
                   component="div"
                   align="center"
                   dangerouslySetInnerHTML={{
-                    __html: DOMPurify.sanitize(selectedRecipe.instructions),
+                    __html: selectedRecipe.instructions,
                   }}
                 />
                 <Typography

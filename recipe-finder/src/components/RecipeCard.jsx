@@ -1,6 +1,5 @@
 import React from "react";
 import { Card, CardContent, CardMedia, Typography } from "@mui/material";
-import DOMPurify from "dompurify";
 
 const RecipeCard = ({ recipe, onClick }) => {
   return (
@@ -11,6 +10,7 @@ const RecipeCard = ({ recipe, onClick }) => {
         height: "100%",
         display: "flex",
         flexDirection: "column",
+        cursor: "pointer",
       }}
       onClick={onClick}
     >
@@ -31,13 +31,9 @@ const RecipeCard = ({ recipe, onClick }) => {
         >
           {recipe.title}
         </Typography>
-        <Typography
-          variant="body2"
-          color="textSecondary"
-          dangerouslySetInnerHTML={{
-            __html: DOMPurify.sanitize(recipe.description),
-          }}
-        ></Typography>
+        <Typography variant="body2" color="textSecondary">
+          {recipe.description}
+        </Typography>
       </CardContent>
     </Card>
   );
