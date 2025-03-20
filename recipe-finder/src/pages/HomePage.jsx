@@ -3,17 +3,8 @@ import RecipeList from "../components/RecipeList";
 import SearchBar from "../components/SearchBar";
 import { fetchRecipes } from "../api/recipeAPI";
 import { GlobalContext } from "../context/GlobalState";
-import {
-  Container,
-  Typography,
-  Box,
-  Modal,
-  Card,
-  CardContent,
-  CardMedia,
-  IconButton,
-} from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
+import { Container, Typography, Box, Modal, Card, CardContent, CardMedia, IconButton } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
 
 const HomePage = () => {
   const [recipes, setRecipes] = useState([]);
@@ -51,61 +42,37 @@ const HomePage = () => {
         <RecipeList recipes={filteredRecipes} onCardClick={handleCardClick} />
       </Box>
       <Modal open={!!selectedRecipe} onClose={handleClose}>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "100vh",
-          }}
-        >
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
           {selectedRecipe && (
-            <Card sx={{ maxWidth: 420, position: "relative" }}>
+            <Card sx={{ maxWidth: 600, position: 'relative' }}>
               <IconButton
-                sx={{ position: "absolute", top: 8, right: 8 }}
+                sx={{ position: 'absolute', top: 8, right: 8 }}
                 onClick={handleClose}
               >
                 <CloseIcon />
               </IconButton>
-              {selectedRecipe.image && (
-                <CardMedia
-                  component="img"
-                  alt={selectedRecipe.title}
-                  height="300"
-                  image={selectedRecipe.image}
-                  title={selectedRecipe.title}
-                />
-              )}
+              <CardMedia
+                component="img"
+                alt={selectedRecipe.title}
+                height="300"
+                image={selectedRecipe.image}
+                title={selectedRecipe.title}
+              />
               <CardContent>
-                <Typography
-                  gutterBottom
-                  variant="h5"
-                  component="h2"
-                  align="center"
-                >
+                <Typography gutterBottom variant="h5" component="h2" align="center">
                   {selectedRecipe.title}
                 </Typography>
-                {selectedRecipe.instructions && (
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    component="div"
-                    align="center"
-                    dangerouslySetInnerHTML={{
-                      __html: selectedRecipe.instructions,
-                    }}
-                  />
-                )}
                 <Typography
-                  variant="h6"
-                  component="h3"
+                  variant="body2"
+                  color="textSecondary"
+                  component="div"
                   align="center"
-                  sx={{ mt: 2 }}
-                >
+                  dangerouslySetInnerHTML={{ __html: selectedRecipe.instructions }}
+                />
+                <Typography variant="h6" component="h3" align="center" sx={{ mt: 2 }}>
                   Nutritional Information
                 </Typography>
-                {selectedRecipe.nutrition &&
-                selectedRecipe.nutrition.nutrients ? (
+                {selectedRecipe.nutrition && selectedRecipe.nutrition.nutrients ? (
                   <ul>
                     {selectedRecipe.nutrition.nutrients.map((nutrient) => (
                       <li key={nutrient.name}>
@@ -114,12 +81,7 @@ const HomePage = () => {
                     ))}
                   </ul>
                 ) : (
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    component="p"
-                    align="center"
-                  >
+                  <Typography variant="body2" color="textSecondary" component="p" align="center">
                     Nutritional information is not available.
                   </Typography>
                 )}
