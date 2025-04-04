@@ -9,23 +9,10 @@ import CloseIcon from '@mui/icons-material/Close';
 const HomePage = () => {
   const [recipes, setRecipes] = useState([]);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const { state } = useContext(GlobalContext);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await fetchRecipes();
-        setRecipes(data);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
+    fetchRecipes().then((data) => setRecipes(data));
   }, []);
 
   const filteredRecipes = recipes.filter((recipe) =>
@@ -39,14 +26,6 @@ const HomePage = () => {
   const handleClose = () => {
     setSelectedRecipe(null);
   };
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
 
   return (
     <Container>
@@ -90,22 +69,6 @@ const HomePage = () => {
                   align="center"
                   dangerouslySetInnerHTML={{ __html: selectedRecipe.instructions }}
                 />
-                <Typography variant="h6" component="h3" align="center" sx={{ mt: 2 }}>
-                  Nutritional Information
-                </Typography>
-                {selectedRecipe.nutrition && selectedRecipe.nutrition.nutrients ? (
-                  <ul>
-                    {selectedRecipe.nutrition.nutrients.map((nutrient) => (
-                      <li key={nutrient.name}>
-                        {nutrient.name}: {nutrient.amount} {nutrient.unit}
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <Typography variant="body2" color="textSecondary" component="p" align="center">
-                    Nutritional information is not available.
-                  </Typography>
-                )}
               </CardContent>
             </Card>
           )}
