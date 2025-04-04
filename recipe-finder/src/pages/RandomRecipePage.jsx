@@ -1,21 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { fetchRandomRecipe } from "../api/recipeAPI";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
+import { GlobalContext } from "../context/GlobalState";
+import { Card, CardContent, CardMedia, Typography, Button, Box, Container } from "@mui/material";
 import DOMPurify from "dompurify";
 
 const RandomRecipePage = () => {
   const [recipe, setRecipe] = useState(null);
   const [error, setError] = useState(null);
+  const { state, dispatch } = useContext(GlobalContext);
 
   useEffect(() => {
     fetchRandomRecipe()
       .then((data) => setRecipe(data))
       .catch((err) => setError(err.message));
   }, []);
+
+  const isFavorite = recipe && state.favorites.some((fav) => fav.id === recipe.id);
+
+  const handleAddToFavorites = () => {
+    dispatch({ type: "ADD_TO_FAVORITES", payload: recipe });
+  };
+
+  const handleRemoveFromFavorites = () => {
+    dispatch({ type: "REMOVE_FROM_FAVORITES", payload: recipe.id });
+  };
 
   if (error) {
     return <div>Error: {error}</div>;
@@ -26,7 +34,7 @@ const RandomRecipePage = () => {
   }
 
   return (
-    <Container maxWidth="xs" sx={{ marginTop: "20px", width: "70%" }}>
+    <Container maxWidth="sm">
       <Card>
         <CardMedia
           component="img"
@@ -36,7 +44,7 @@ const RandomRecipePage = () => {
           title={recipe.title}
         />
         <CardContent>
-          <Typography gutterBottom variant="h6" component="h2" align="center">
+          <Typography gutterBottom variant="h5" component="h2" align="center">
             {recipe.title}
           </Typography>
           <Typography
@@ -69,6 +77,17 @@ const RandomRecipePage = () => {
               Nutritional information is not available.
             </Typography>
           )}
+          <Box mt={2} display="flex" justifyContent="center">
+            {isFavorite ? (
+              <Button variant="contained" color="secondary" onClick={handleRemoveFromFavorites}>
+                Remove from Favorites
+              </Button>
+            ) : (
+              <Button variant="contained" color="primary" onClick={handleAddToFavorites}>
+                Add to Favorites
+              </Button>
+            )}
+          </Box>
         </CardContent>
       </Card>
     </Container>
