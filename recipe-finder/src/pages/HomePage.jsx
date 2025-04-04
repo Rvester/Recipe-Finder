@@ -3,7 +3,7 @@ import RecipeList from "../components/RecipeList";
 import SearchBar from "../components/SearchBar";
 import { fetchRecipes } from "../api/recipeAPI";
 import { GlobalContext } from "../context/GlobalState";
-import { Container, Typography, Box, Modal, Card, CardContent, CardMedia, IconButton } from "@mui/material";
+import { Container, Typography, Box, Modal, Card, CardContent, CardMedia, IconButton, Alert } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 
 const HomePage = () => {
@@ -12,7 +12,9 @@ const HomePage = () => {
   const { state } = useContext(GlobalContext);
 
   useEffect(() => {
-    fetchRecipes().then((data) => setRecipes(data));
+    fetchRecipes().then((data) => setRecipes(data)).catch((error) => {
+      console.error("Error fetching recipes:", error);
+    });
   }, []);
 
   const filteredRecipes = recipes.filter((recipe) =>
@@ -39,7 +41,13 @@ const HomePage = () => {
           Discover Delicious Recipes
         </Typography>
         <SearchBar />
-        <RecipeList recipes={filteredRecipes} onCardClick={handleCardClick} />
+        {filteredRecipes.length === 0 ? (
+          <Alert severity="info" sx={{ mt: 2 }}>
+            No recipes found. Try searching for something else!
+          </Alert>
+        ) : (
+          <RecipeList recipes={filteredRecipes} onCardClick={handleCardClick} />
+        )}
       </Box>
       <Modal open={!!selectedRecipe} onClose={handleClose}>
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
