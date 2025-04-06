@@ -1,7 +1,7 @@
 export const fetchRecipes = async () => {
   try {
     const response = await fetch(
-      `https://api.spoonacular.com/recipes/random?number=100&includeNutrition=true&apiKey=${process.env.REACT_APP_API_KEY}`
+      `https://api.spoonacular.com/recipes/random?number=100&includeNutrition=true&apiKey=${import.meta.env.VITE_API_KEY}`
     );
     const data = await response.json();
     console.log('API response:', data);
@@ -19,7 +19,7 @@ export const fetchRecipes = async () => {
 export const fetchRecipeById = async (id) => {
   try {
     const response = await fetch(
-      `https://api.spoonacular.com/recipes/${id}/information?apiKey=${process.env.REACT_APP_API_KEY}`
+      `https://api.spoonacular.com/recipes/${id}/information?apiKey=${import.meta.env.VITE_API_KEY}`
     );
     const data = await response.json();
     return data;
@@ -32,7 +32,7 @@ export const fetchRecipeById = async (id) => {
 export const fetchRandomRecipe = async () => {
   try {
     const response = await fetch(
-      `https://api.spoonacular.com/recipes/random?number=1&includeNutrition=true&apiKey=${process.env.REACT_APP_API_KEY}`
+      `https://api.spoonacular.com/recipes/random?number=1&includeNutrition=true&apiKey=${import.meta.env.VITE_API_KEY}`
     );
     const data = await response.json();
     if (data && Array.isArray(data.recipes)) {
